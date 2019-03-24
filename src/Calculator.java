@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,6 +18,7 @@ JButton mult = new JButton();
 JButton div = new JButton();
 JTextField box1 = new JTextField();
 JTextField box2 = new JTextField();
+JLabel label = new JLabel();
 public static void main(String[] args) {
 Calculator c = new Calculator();
 c.createGUI();
@@ -35,6 +37,7 @@ void createGUI() {
 	box1.setPreferredSize(new Dimension(200,25));
 	box2.setPreferredSize(new Dimension(200,25));
 	panel.add(box2);
+	panel.add(label);
 	add.addActionListener(this);
 	sub.addActionListener(this);
 	mult.addActionListener(this);
@@ -50,28 +53,30 @@ public void actionPerformed(ActionEvent e) {
 		String b = box2.getText();
 		int c = Integer.parseInt(a);
 		int d = Integer.parseInt(b);
-		JOptionPane.showMessageDialog(null, c+d);  
+		label.setText((c+d)+"");
 	}
 	if(e.getSource()== sub) {
 		String a = box1.getText();
 		String b = box2.getText();
 		int c = Integer.parseInt(a);
 		int d = Integer.parseInt(b);
-		JOptionPane.showMessageDialog(null, c-d);  
+		label.setText((c-d)+"");  
+		
 	}
 	if(e.getSource()== mult) {
 		String a = box1.getText();
 		String b = box2.getText();
 		int c = Integer.parseInt(a);
 		int d = Integer.parseInt(b);
-		JOptionPane.showMessageDialog(null, c*d);  
+		label.setText((c*d)+"");  
 	}
 	if(e.getSource()== div) {
 		String a = box1.getText();
 		String b = box2.getText();
 		double c = Integer.parseInt(a);
 		double d = Integer.parseInt(b);
-		JOptionPane.showMessageDialog(null, c/d);  
+		label.setText((c/d)+"");  
 	}
+frame.pack();
 }
 }
