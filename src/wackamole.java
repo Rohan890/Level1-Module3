@@ -1,65 +1,76 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class wackamole {
+public class wackamole implements ActionListener {
 JFrame frame = new JFrame();
 JPanel panel = new JPanel();
-JButton button1 = new JButton();
-JButton button2 = new JButton();
-JButton button3 = new JButton();
-JButton button4 = new JButton();
-JButton button5 = new JButton();
-JButton button6 = new JButton();
-JButton button7 = new JButton();
-JButton button8 = new JButton();
-JButton button9 = new JButton();
-JButton button10 = new JButton();
-JButton button11= new JButton();
-JButton button12 = new JButton();
-JButton button13 = new JButton();
-JButton button14 = new JButton();
-JButton button15 = new JButton();
-JButton button16 = new JButton();
-JButton button17 = new JButton();
-JButton button18 = new JButton();
-JButton button19 = new JButton();
-JButton button21 = new JButton();
-JButton button22 = new JButton();
-JButton button23 = new JButton();
-JButton button24 = new JButton();
+int score = 0;
+Date timeAtStart;
+
 
 public static void main(String[] args) {
 	wackamole m = new wackamole();
 	m.createUi();
+	
 }
 void createUi() {
 	frame.add(panel);
-	panel.add(button1);
-	panel.add(button2);
-	panel.add(button3);
-	panel.add(button4);
-	panel.add(button5);
-	panel.add(button6);
-	panel.add(button7);
-	panel.add(button8);
-	panel.add(button9);
-	panel.add(button10);
-	panel.add(button11);
-	panel.add(button12);
-	panel.add(button13);
-	panel.add(button14);
-	panel.add(button15);
-	panel.add(button16);
-	panel.add(button17);
-	panel.add(button18);
-	panel.add(button19);
-	panel.add(button21);
-	panel.add(button22);
-	panel.add(button23);
-	panel.add(button24);
+	drawButtons();
+	timeAtStart = new Date();
 	frame.setSize(300, 800);
 	frame.setVisible(true);
 
+}
+void drawButtons() {
+Random r = new Random();
+int n = r.nextInt(24);
+for (int i = 0; i < 24; i++) {
+	JButton b = new JButton();
+	panel.add(b);
+	b.addActionListener(this);
+	if(i == n) {
+		b.setText("mole");
+	}
+}
+}
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	JButton f = (JButton) e.getSource();
+	if(f.getText().equals("mole")) {
+		
+		score += 1;
+		
+		
+	}
+	
+	else {
+		speak("no "
+				+ "you");
+	}
+frame.remove(panel);
+panel = new JPanel();
+frame.add(panel);
+drawButtons();
+}
+void speak(String words) {
+    try {
+         Runtime.getRuntime().exec("say " + words).waitFor();
+    } catch (Exception e) {
+         e.printStackTrace();
+    }
+}
+private void endGame(Date timeAtStart, int molesWhacked) {
+    Date timeAtEnd = new Date();
+    JOptionPane.showMessageDialog(null, "Your whack rate is "
+         + ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked)
+         + " moles per second.");
 }
 }
