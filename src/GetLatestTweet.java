@@ -21,6 +21,9 @@ public class GetLatestTweet implements ActionListener {
 public static void main(String[] args) {
 GetLatestTweet t = new GetLatestTweet();
 t.createGUI();
+String c= "0";
+
+
 }
 void createGUI() {
 	frame.add(panel);
